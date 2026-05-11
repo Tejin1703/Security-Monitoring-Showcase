@@ -1,0 +1,20 @@
+May 11 03:07:14 server-01 sshd[100]: Accepted password for guest from 192.168.1.10 port 22 ssh2
+May 11 03:07:53 server-01 sshd[100]: Accepted password for root from 172.16.0.2 port 22 ssh2
+May 11 03:07:09 server-01 sshd[100]: Accepted password for dbadmin from 123.123.123.123 port 22 ssh2
+May 11 03:07:05 server-01 sshd[100]: Accepted password for guest from 172.16.0.2 port 22 ssh2
+May 11 03:08:02 server-01 sshd[100]: Accepted password for testuser from 172.16.0.2 port 22 ssh2
+May 11 03:08:46 server-01 sshd[101]: Failed password for admin from 10.0.0.5 port 22 ssh2
+May 11 03:09:24 server-01 sshd[101]: Failed password for root from 123.123.123.123 port 22 ssh2
+May 11 03:09:29 server-01 sshd[101]: Failed password for admin from 192.168.1.10 port 22 ssh2
+May 11 03:11:46 server-01 sshd[102]: Failed password for root from 185.220.101.10 port 22 ssh2
+May 11 03:11:47 server-01 sshd[102]: Failed password for root from 185.220.101.10 port 22 ssh2
+May 11 03:11:48 server-01 sshd[102]: Failed password for root from 185.220.101.10 port 22 ssh2
+May 11 03:11:49 server-01 sshd[102]: Failed password for root from 185.220.101.10 port 22 ssh2
+May 11 03:11:50 server-01 sshd[102]: Failed password for root from 185.220.101.10 port 22 ssh2
+May 11 03:11:51 server-01 sshd[102]: Failed password for root from 185.220.101.10 port 22 ssh2
+May 11 03:11:52 server-01 sshd[102]: Failed password for root from 185.220.101.10 port 22 ssh2
+May 11 03:13:26 server-01 sshd[103]: Failed password for invalid user malicious_actor from 192.168.1.99 port 22 ssh2
+May 11 03:15:06 server-01 sudo: testuser : TTY=pts/0 ; PWD=/home/testuser ; USER=root ; COMMAND=/usr/bin/cat /etc/shadow
+May 11 03:15:08 server-01 sudo: testuser : TTY=pts/0 ; PWD=/home/testuser ; USER=root ; COMMAND=/usr/bin/cat /etc/shadow
+May 11 03:15:10 server-01 sudo: testuser : TTY=pts/0 ; PWD=/home/testuser ; USER=root ; COMMAND=/usr/bin/cat /etc/shadow
+May 11 03:15:12 server-01 sudo: testuser : TTY=pts/0 ; PWD=/home/testuser ; USER=root ; COMMAND=/usr/bin/cat /etc/shadow
