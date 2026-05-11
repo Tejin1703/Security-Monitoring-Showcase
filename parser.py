@@ -1,19 +1,24 @@
 import re
+from datetime import datetime
 
 def parse_log_line(line):
     """
-    Extracts timestamp, process, and message from a standard syslog line.
-    Example: May 11 10:00:01 server-01 sshd[123]: Message here
+    Extracts structured data, converting the timestamp to a datetime object.
     """
-    # Regex to match: Month Day Time Hostname Process[PID]: Message
     pattern = r'^(\w{3}\s+\d+\s\d{2}:\d{2}:\d{2})\s+[\w-]+\s+([\w\[\]\d]+):\s+(.*)$'
     match = re.match(pattern, line)
     
     if match:
+        raw_ts = match.group(1)
+        # Syslog doesn't have a year. We assume the current year.
+        current_year = datetime.now().year
+        dt_obj = datetime.strptime(f"{raw_ts} {current_year}", "%b %d %H:%M:%S %Y")
+        
         return {
-            "timestamp": match.group(1),
+            "timestamp": dt_obj,
             "process": match.group(2),
-            "message": match.group(3)
+            "message": match.group(3),
+            "raw_timestamp": raw_ts
         }
     return None
 

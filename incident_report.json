@@ -2,119 +2,99 @@
     "report_info": {
         "generated_at": "2026-05-11",
         "source_file": "logs/mock_auth.log",
-        "total_alerts": 16
+        "total_alerts": 13
     },
     "alerts": [
         {
             "type": "FAILED_LOGIN",
             "severity": "LOW",
-            "user": "admin",
+            "user": "root",
             "ip": "10.0.0.5",
-            "timestamp": "May 11 03:08:46"
+            "timestamp": "May 11 03:24:17"
         },
         {
             "type": "FAILED_LOGIN",
             "severity": "LOW",
             "user": "root",
+            "ip": "172.16.0.2",
+            "timestamp": "May 11 03:23:30"
+        },
+        {
+            "type": "FAILED_LOGIN",
+            "severity": "LOW",
+            "user": "testuser",
             "ip": "123.123.123.123",
-            "timestamp": "May 11 03:09:24"
-        },
-        {
-            "type": "FAILED_LOGIN",
-            "severity": "LOW",
-            "user": "admin",
-            "ip": "192.168.1.10",
-            "timestamp": "May 11 03:09:29"
+            "timestamp": "May 11 03:23:14"
         },
         {
             "type": "FAILED_LOGIN",
             "severity": "LOW",
             "user": "root",
             "ip": "185.220.101.10",
-            "timestamp": "May 11 03:11:46"
+            "timestamp": "May 11 03:26:33"
         },
         {
             "type": "FAILED_LOGIN",
             "severity": "LOW",
             "user": "root",
             "ip": "185.220.101.10",
-            "timestamp": "May 11 03:11:47"
+            "timestamp": "May 11 03:26:34"
         },
         {
             "type": "FAILED_LOGIN",
             "severity": "LOW",
             "user": "root",
             "ip": "185.220.101.10",
-            "timestamp": "May 11 03:11:48"
+            "timestamp": "May 11 03:26:35"
         },
         {
             "type": "FAILED_LOGIN",
             "severity": "LOW",
             "user": "root",
             "ip": "185.220.101.10",
-            "timestamp": "May 11 03:11:49"
+            "timestamp": "May 11 03:26:36"
         },
         {
             "type": "BRUTE_FORCE_ATTACK",
             "severity": "HIGH",
             "ip": "185.220.101.10",
             "attempts": 5,
-            "timestamp": "May 11 03:11:50",
-            "message": "Suspicious activity: 5 failed attempts from 185.220.101.10"
+            "timestamp": "May 11 03:26:37",
+            "message": "Suspicious activity: 5 failed attempts from 185.220.101.10 in 60s window."
         },
         {
-            "type": "BRUTE_FORCE_ATTACK",
-            "severity": "HIGH",
+            "type": "FAILED_LOGIN",
+            "severity": "LOW",
+            "user": "root",
             "ip": "185.220.101.10",
-            "attempts": 6,
-            "timestamp": "May 11 03:11:51",
-            "message": "Suspicious activity: 6 failed attempts from 185.220.101.10"
+            "timestamp": "May 11 03:26:38"
         },
         {
-            "type": "BRUTE_FORCE_ATTACK",
-            "severity": "HIGH",
+            "type": "FAILED_LOGIN",
+            "severity": "LOW",
+            "user": "root",
             "ip": "185.220.101.10",
-            "attempts": 7,
-            "timestamp": "May 11 03:11:52",
-            "message": "Suspicious activity: 7 failed attempts from 185.220.101.10"
+            "timestamp": "May 11 03:26:39"
         },
         {
             "type": "INVALID_USER",
             "severity": "MEDIUM",
             "user": "malicious_actor",
             "ip": "192.168.1.99",
-            "timestamp": "May 11 03:13:26"
+            "timestamp": "May 11 03:28:13"
         },
         {
             "type": "FAILED_LOGIN",
             "severity": "LOW",
             "user": "malicious_actor",
             "ip": "192.168.1.99",
-            "timestamp": "May 11 03:13:26"
+            "timestamp": "May 11 03:28:13"
         },
         {
-            "type": "SUDO_USAGE",
-            "severity": "INFO",
-            "message": "testuser : TTY=pts/0 ; PWD=/home/testuser ; USER=root ; COMMAND=/usr/bin/cat /etc/shadow",
-            "timestamp": "May 11 03:15:06"
-        },
-        {
-            "type": "SUDO_USAGE",
-            "severity": "INFO",
-            "message": "testuser : TTY=pts/0 ; PWD=/home/testuser ; USER=root ; COMMAND=/usr/bin/cat /etc/shadow",
-            "timestamp": "May 11 03:15:08"
-        },
-        {
-            "type": "SUDO_USAGE",
-            "severity": "INFO",
-            "message": "testuser : TTY=pts/0 ; PWD=/home/testuser ; USER=root ; COMMAND=/usr/bin/cat /etc/shadow",
-            "timestamp": "May 11 03:15:10"
-        },
-        {
-            "type": "SUDO_USAGE",
-            "severity": "INFO",
-            "message": "testuser : TTY=pts/0 ; PWD=/home/testuser ; USER=root ; COMMAND=/usr/bin/cat /etc/shadow",
-            "timestamp": "May 11 03:15:12"
+            "type": "SUDO_ABUSE_SENSITIVE",
+            "severity": "CRITICAL",
+            "message": "CRITICAL: User executing high-risk command: testuser : TTY=pts/0 ; PWD=/home/testuser ; USER=root ; COMMAND=/usr/bin/cat /etc/shadow",
+            "timestamp": "May 11 03:30:03"
         }
     ]
 }

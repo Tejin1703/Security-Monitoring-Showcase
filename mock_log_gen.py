@@ -32,11 +32,15 @@ def generate_mock_logs(filename="logs/mock_auth.log"):
         timestamp = (start_time + datetime.timedelta(seconds=400)).strftime("%b %d %H:%M:%S")
         f.write(f"{timestamp} server-01 sshd[103]: Failed password for invalid user malicious_actor from 192.168.1.99 port 22 ssh2\n")
         
-        # 5. Sudo Abuse (Repeated failed sudo)
+        # 5. Sudo Usage
         user = "testuser"
-        for i in range(4):
-            timestamp = (start_time + datetime.timedelta(seconds=500 + (i*2))).strftime("%b %d %H:%M:%S")
-            f.write(f"{timestamp} server-01 sudo: {user} : TTY=pts/0 ; PWD=/home/{user} ; USER=root ; COMMAND=/usr/bin/cat /etc/shadow\n")
+        # 5a. Normal sudo (Should be ignored by new rule)
+        timestamp = (start_time + datetime.timedelta(seconds=500)).strftime("%b %d %H:%M:%S")
+        f.write(f"{timestamp} server-01 sudo: {user} : TTY=pts/0 ; PWD=/home/{user} ; USER=root ; COMMAND=/usr/bin/ls /var/www\n")
+        
+        # 5b. Sudo Abuse (Sensitive command - Should be flagged)
+        timestamp = (start_time + datetime.timedelta(seconds=510)).strftime("%b %d %H:%M:%S")
+        f.write(f"{timestamp} server-01 sudo: {user} : TTY=pts/0 ; PWD=/home/{user} ; USER=root ; COMMAND=/usr/bin/cat /etc/shadow\n")
 
     print(f"✅ Mock log file created at: {filename}")
 

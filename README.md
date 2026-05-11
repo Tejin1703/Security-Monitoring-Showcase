@@ -1,48 +1,42 @@
 # 🛡️ Mini SOC: Security Monitoring & Incident Detection
 
-A lightweight, modular Security Operations Center (SOC) tool built in Python. This project simulates a log-based detection system that monitors Linux authentication logs (`/var/log/auth.log`) to identify and alert on suspicious activity.
+A lightweight, modular Security Operations Center (SOC) tool built in Python. This system implements analyst-level detection logic to monitor Linux authentication logs for indicators of compromise (IoC).
 
 ## 🚀 Key Features
-- **Brute Force Detection**: Identifies IPs with 5+ failed login attempts within a short window.
-- **Invalid User Monitoring**: Flags attempts to login with usernames that do not exist on the system.
-- **Sudo Abuse Detection**: Monitors for repeated or suspicious `sudo` command usage.
-- **Structured Reporting**: Generates machine-readable JSON incident reports for further analysis.
-- **Modular Architecture**: Easy to add new detection rules (regex-based).
+- **Time-Windowed Brute Force Detection**: Detects 5+ failures within a 60-second sliding window.
+- **Noise Reduction**: Implements alert grouping to prevent console spamming during active attacks.
+- **Context-Aware Sudo Monitoring**: Differentiates between standard usage and high-risk command execution (e.g., `/etc/shadow`).
+- **Structured Incident Reporting**: Generates machine-readable JSON reports for automated response.
 
-## 📁 Project Structure
-- `main.py`: The core engine that orchestrates log parsing and detection.
-- `detections/`:
-  - `parser.py`: Extracts IP, User, and Timestamp from raw syslog strings.
-  - `rules.py`: Contains logic for security alerts (Brute Force, Sudo, etc.).
-- `logs/`: Directory for input logs (includes a mock generator for testing).
-- `output/`: Where the `incident_report.json` is generated.
+## 🗺️ MITRE ATT&CK® Mapping
+| Technique | ID | Description |
+| :--- | :--- | :--- |
+| **Brute Force** | [T1110](https://attack.mitre.org/techniques/T1110/) | Automated password guessing against SSH. |
+| **Valid Accounts** | [T1078](https://attack.mitre.org/techniques/T1078/) | Monitoring for successful vs failed logins. |
+| **Abuse Elevation Control** | [T1548](https://attack.mitre.org/techniques/T1548/) | Detection of sensitive command execution via Sudo. |
 
-## 🛠️ How to Run
-1. **Setup Environment**: Ensure you have Python 3 installed.
-2. **Generate Test Data**: 
-   ```bash
-   python3 mock_log_gen.py
-   ```
-3. **Run Detection Engine**:
-   ```bash
-   python3 main.py
-   ```
-4. **Review Findings**:
-   Check `output/incident_report.json` for a summary of detected threats.
-
-## 📊 Example Incident Report
-```json
-{
-    "type": "BRUTE_FORCE_ATTACK",
-    "severity": "HIGH",
-    "ip": "185.220.101.10",
-    "attempts": 7,
-    "timestamp": "May 11 03:11:52",
-    "message": "Suspicious activity: 7 failed attempts from 185.220.101.10"
-}
+## 🏗️ System Architecture
+```mermaid
+graph LR
+    A[auth.log] --> B[Log Parser]
+    B --> C[Detection Engine]
+    C --> D{Rules}
+    D --> E[Brute Force Rule]
+    D --> F[Sudo Abuse Rule]
+    D --> G[Invalid User Rule]
+    E & F & G --> H[Alert Aggregator]
+    H --> I[JSON Report]
+    H --> J[Console Alerts]
 ```
 
-## 🛡️ Future Enhancements
-- [ ] **Live Tail**: Real-time monitoring of `/var/log/auth.log` using `tail -f` logic.
-- [ ] **Email Alerts**: Integration with SMTP to send instant notifications.
-- [ ] **Visual Dashboard**: A simple web UI to visualize attack patterns over time.
+## 🛡️ Security Considerations
+- **Detection Trade-offs**: The 60s window is designed to catch automated bots. A slow, stealthy brute-force attack (1 attempt every 5 minutes) would currently bypass this rule—this is a classic detection challenge.
+- **False Positives**: Standard `sudo` usage is filtered out, but legitimate administrative tasks involving sensitive files may still trigger alerts.
+- **Scalability**: For production environments with millions of logs, this Python list-based approach would be replaced by a high-performance database or SIEM (like ELK or Splunk).
+
+## 🛠️ How to Run
+```bash
+python3 mock_log_gen.py  # Create test evidence
+python3 main.py          # Run detection engine
+```
+Check `output/incident_report.json` for analysis results.
